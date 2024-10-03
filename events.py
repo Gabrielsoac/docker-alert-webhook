@@ -14,8 +14,6 @@ for event in client.events(decode=True):
     if(event['Type'] == 'network'):
         continue
 
-    print(event)
-
     container_id = event["id"]
     container_action = event["Action"]
     container_name = event["Actor"]["Attributes"]["name"]
