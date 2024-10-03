@@ -5,11 +5,16 @@ import requests as rq
 ##client = dkr.from_env() -> busca pelas variáveis de ambiente
 
 client = dkr.DockerClient(base_url='unix://var/run/docker.sock')
-webhook_discord_url = input("Enter the webhook_url: ")
+#webhook_discord_url = input("Enter the webhook_url: ")
+webhook_discord_url = input('Enter the webhook URL: ')
 
 for event in client.events(decode=True):
     #if(event['Action'] == 'die'):
-        #print(event)
+
+    if(event['Type'] == 'network'):
+        continue
+
+    print(event)
 
     container_id = event["id"]
     container_action = event["Action"]
