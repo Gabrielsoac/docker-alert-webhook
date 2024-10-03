@@ -12,12 +12,13 @@ for event in client.events(decode=True):
         #print(event)
 
     container_id = event["id"]
+    container_action = event["Action"]
     container_name = event["Actor"]["Attributes"]["name"]
     container_epoch_time = event["time"]
     container_time_stamp = dt.datetime.fromtimestamp(container_epoch_time)
     
-    payload = {"content": f"Alert \n Container ID: {container_id}\n Container Name: {container_name}\n Time: {container_time_stamp}"}
-    rq.post(webhook_discord_url, data=payload)  
+    payload = {"content": f"Alert \n Container ID: {container_id}\n Container Name: {container_name}\n Action:{container_action} \nTime: {container_time_stamp}"}
+    rq.post(webhook_discord_url, data=payload)
     
 client.close()
 
